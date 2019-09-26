@@ -2,7 +2,8 @@
 
 &nbsp;
 
-###### [Gabriela Morgenshtern](https://orcid.org/0000-0003-4762-8797), Department of Cells and System Biology, University of Toronto, Canada. &lt;g.morgenshtern@mail.utoronto.ca&gt;
+###### [Gabriela Morgenshtern](https://orcid.org/0000-0003-4762-8797),
+&nbsp;Department of Cells and System Biology, University of Toronto, Canada. &lt;g.morgenshtern@mail.utoronto.ca&gt;
 
 
 <!-- TOCbelow -->
@@ -39,7 +40,7 @@
 
 # 3 Acknowledgements
 
-Thanks to my Dr. Boris Steipe for providing the skeleton setup for this package through his own template (https://github.com/hyginn/rpt)
+Thanks to Dr. Boris Steipe for providing the skeleton setup for this package through his own template (https://github.com/hyginn/rpt)
 
 
 &nbsp;
