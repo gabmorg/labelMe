@@ -25,7 +25,7 @@ ui <- fluidPage(
       p("Label each of the images below using one of the provided lables.
         Please note that each image must have a different label, unless
         both of those are *UNKNOWN*")
-      # TO ADD IMAGES, WRITE A LOOP FOR THE www DIRECTORY HERE:
+      # TO ADD IMAGES, insert the fileInput result logic here:
       # The img function looks for your image file in a specific place.
       # Your file must be in a folder named www in the same directory as the app.R
     )
