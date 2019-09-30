@@ -20,9 +20,10 @@ library(shiny)
 #' @export
 #' @import shiny
 
- serveMe <- function(labelingList, imagesPath) {
-   imagesPathOutput <- list("img1", "img2", "img3" )# test code only, or keep as an "example serve"
-   appDir <- system.file("available-shiny-apps", "ultrasound-shiny", package = "labelMe")
+ serveMe <- function(labelingList) {
+   appDir <- system.file("available-shiny-apps",
+                         "ultrasound-shiny",
+                         package = "labelMe")
    if (appDir == "") {
      stop("Could not find example directory. Try re-installing `labelMe`.", call. = FALSE)
    }

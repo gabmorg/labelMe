@@ -38,6 +38,7 @@ ui <- fluidPage(
       br(),
       br()
     ),
+
     mainPanel(
       h3("Labeling Task"),
       p("Label each of the images below by selecting one of the provided lables."),
@@ -45,7 +46,19 @@ ui <- fluidPage(
         strong("unknown,"), "each image should have a different label, as each image represents
         a different view of the same ultrasound object (ex. the same kidney)"),
       br(),
-      br()
+      br(),
+
+      fluidRow(
+        column(3, offset = 1, inline = TRUE,
+               radioButtons("radio1", h5("Label"),
+                            choices = list("Label 1" = 1, "Label 1" = 2,
+                                           "Unknown" = 3), selected = character(0))),
+        column(3, offset = 1, inline = TRUE,
+               radioButtons("radio2", h5("Label"),
+                            choices = list("Label 2" = 1, "Label 2" = 2,
+                                           "Unknown" = 3), selected = character(0)))
+      )
+
       # TO ADD IMAGES, insert the fileInput result logic here:
       # The img function looks for your image file in a specific place.
       # Your file must be in a folder named www in the same directory as the app.R
