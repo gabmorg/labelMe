@@ -40,6 +40,8 @@ ui <- fluidPage(
     ),
 
     mainPanel(
+
+      # Instructions for user:
       h3("Labeling Task"),
       p("Label each of the images below by selecting one of the provided lables."),
       em("Note that, unless you're selecting the option ",
@@ -48,20 +50,28 @@ ui <- fluidPage(
       br(),
       br(),
 
+      # Image directory upload:
+      # INSERT HERE
+
+      # Image display layout:
       fluidRow(
-        column(3, offset = 1, inline = TRUE,
+        column(3, offset = 1, imageOutput("img1")),
+        column(3, offset = 1, imageOutput("img2"))
+
+      ),
+
+
+      # Radio buttons for labeling:
+      fluidRow(
+        column(3, offset = 1,
                radioButtons("radio1", h5("Label"),
                             choices = list("Label 1" = 1, "Label 1" = 2,
                                            "Unknown" = 3), selected = character(0))),
-        column(3, offset = 1, inline = TRUE,
+        column(3, offset = 1,
                radioButtons("radio2", h5("Label"),
                             choices = list("Label 2" = 1, "Label 2" = 2,
                                            "Unknown" = 3), selected = character(0)))
       )
-
-      # TO ADD IMAGES, insert the fileInput result logic here:
-      # The img function looks for your image file in a specific place.
-      # Your file must be in a folder named www in the same directory as the app.R
     )
   ),
   br(),

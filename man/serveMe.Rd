@@ -4,19 +4,15 @@
 \alias{serveMe}
 \title{Run the labelMe webapp - user facing function}
 \usage{
-serveMe(labelingList, imagesPath)
+serveMe(labelingList)
 }
 \arguments{
 \item{labelingList}{A list of strings denoting the labels that
 the user would like to have as options for the image labeling task}
-
-\item{imagesPath}{A string of the filepath on the local machine where
-the directory of images to label can be found. Some restrictions exist
-in terms of the structuring of the images}
 }
 \value{
-Returns a dataframe containing the modified list of image file names
-which represent the labeling of the user
+None. Side effect of calling the function is the running of the
+Shiny webapp defined in inst/available-shiny-apps/ultrasound-shiny/app.R
 }
 \description{
 A function that allows a user to set their desired webapp parameters

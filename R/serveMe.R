@@ -9,12 +9,9 @@ library(shiny)
 #'
 #' @param labelingList A list of strings denoting the labels that
 #' the user would like to have as options for the image labeling task
-#' @param imagesPath A string of the filepath on the local machine where
-#' the directory of images to label can be found. Some restrictions exist
-#' in terms of the structuring of the images
 #'
-#' @return Returns a dataframe containing the modified list of image file names
-#' which represent the labeling of the user
+#' @return None. Side effect of calling the function is the running of the
+#' Shiny webapp defined in inst/available-shiny-apps/ultrasound-shiny/app.R
 #'
 #'
 #' @export
@@ -29,6 +26,5 @@ library(shiny)
    }
 
    shiny::runApp(appDir, display.mode = "normal")
-   return(as.data.frame(row.names = imagesPathOutput))
 }
 
