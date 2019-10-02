@@ -21,6 +21,7 @@ if (!require(htmltools, quietly = TRUE)) {
   library(htmltools)
 }
 
+source("helpers.R")
 
 # Define UI for app that stores image labels ----
 ui <- fluidPage(
@@ -31,13 +32,25 @@ ui <- fluidPage(
 
   # App title ----
   titlePanel("labelMe: Manual Labelling for Clinical Imaging"),
+
   sidebarLayout(
     position = "right",
+
     sidebarPanel(
+      downloadButton('download',"Download labels.csv"),
       h3("Images"),
       br(),
-      br()
+      br(),
+      # Image directory upload:
+      # returns dataframe! easy to work with :D
+      fileInput(
+        inputId = 'imageUpload',
+        multiple = TRUE,
+        label = 'Upload Images',
+        accept = c('image/png', 'image/jpeg', 'image/jpg', 'image/pdf'),
+        width = '80%')
     ),
+
 
     mainPanel(
 
@@ -50,32 +63,25 @@ ui <- fluidPage(
       br(),
       br(),
 
-      # Image directory upload:
-      # INSERT HERE
-
       # Image display layout:
-      fluidRow(
-        column(3, offset = 1, imageOutput("img1")),
-        column(3, offset = 1, imageOutput("img2"))
-
-      ),
-
 
       # Radio buttons for labeling:
+      # may need to change to inputselect for Lauren
+      # createImageDisplays() should automate this away
       fluidRow(
+        column(3, offset = 1, imageOutput("img1")),
         column(3, offset = 1,
-               radioButtons("radio1", h5("Label"),
-                            choices = list("Label 1" = 1, "Label 1" = 2,
-                                           "Unknown" = 3), selected = character(0))),
-        column(3, offset = 1,
-               radioButtons("radio2", h5("Label"),
-                            choices = list("Label 2" = 1, "Label 2" = 2,
-                                           "Unknown" = 3), selected = character(0)))
-      )
+               radioButtons(inputId = "radio1", label = textOutput("imgName"),
+                            choices = list("Label 1", "Label 2",
+                                           "Unknown"), selected = character(0)))
+      ),
+      textOutput("selected_radio1")
+
     )
-  ),
-  br(),
-  downloadButton('download',"Download image labels CSV")
+
+
+  )
+
 )
 
 
@@ -84,7 +90,32 @@ server <- function(input, output){
 
   # Example dataset
   # TO DO: input the labels data here (currently a test dataset)
-  data <- mtcars
+  # keys <- reactive({input$imageUpload$name})
+
+  data <- data.frame(key = 1, label = 1, row.names = 1, stringsAsFactors = FALSE)
+
+  output$imgName <- renderText({paste(input$imageUpload$name)})
+
+  # observer: print(input$imageUpload)
+
+  output$img1 <- renderImage(
+                    {list(src = input$imageUpload$datapath)},
+                    deleteFile = FALSE)
+
+
+
+  # TO FIX
+  # output$imageList <- renderTable({
+  #  for(i in 1:length(input$imageUpload[,1])){
+  #    images <- list()
+  #     images[[i]] <- renderImage(input$imageUpload$datapath)
+  #   }
+  # })
+
+  # to delete:
+  output$selected_radio1 <- renderText({paste("You have selected", input$radio1)})
+
+
 
   # Download a file with the name labels-DATE.csv
   output$download <- downloadHandler(

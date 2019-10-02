@@ -22,7 +22,7 @@ library(shiny)
                          "ultrasound-shiny",
                          package = "labelMe")
    if (appDir == "") {
-     stop("Could not find example directory. Try re-installing `labelMe`.", call. = FALSE)
+     stop("Could not find app directory. Try re-installing `labelMe`.", call. = FALSE)
    }
 
    shiny::runApp(appDir, display.mode = "normal")
