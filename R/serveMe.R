@@ -18,22 +18,20 @@
 #' @source "setGlobalVariables.R"
 
  serveMe <- function(labelingList) {
-
-   # INSERT SOURCE BLOG POST
    appDir <- system.file("available-shiny-apps",
                          "ultrasound-shiny",
                          package = "labelMe")
    if (appDir == "") {
-     stop("Could not find app directory. Try re-installing `labelMe`.", call. = FALSE)
+     stop("Could not find the ultrasound-shiny app. Try re-installing `labelMe`.", call. = FALSE)
    }
 
    else {
     # Pass the input variable (the desired labels for images) to labelMe
-    # https://community.rstudio.com/t/pass-variables-to-shiny-app/1950
      .GlobalEnv$LABELS <- labelingList
      shiny::runApp(appDir, display.mode = "normal")
    }
 
+   # Clear global environment after exiting app window
    on.exit(rm(LABELS, envir=.GlobalEnv))
 }
 

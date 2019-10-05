@@ -39,7 +39,23 @@ library("TestingPackage")
 
 # 2 Notes - EDIT 
 
-- **To test functionality** see test images available for upload in the /data directory
+## To test functionality
+1. Save the following images to your local machine:
+![](./inst/extdata/pt1234_12.jpg)
+![](./inst/extdata/pt_1234_11.jpg)
+2. Call ```r labelMe::serveMe(list("test label1", "test label2")) ``` to launch the app
+(replacing the strings to whatever labels you'd like to apply to the images)
+3. Upload the files to the Shiny app using the file browser to the right; this will change the label of the radio button *group* to the name of the uploaded file
+
+- While in the code, the file browser allows for the upload of multiple files,
+this is not yet a functionality of the user interface of the app and will be resolved for
+the final submission
+
+3. Click the radio button
+4. Click "Save selected labels" to prepare the CSV for download
+5. Click "Download labels.csv" to download the CSV to your local machine. 
+- While the download of the file is currently functional, the reactive addition of data during the "Save selected labels" interaction is not, and this will be fixed for the final version
+
 
 &nbsp;
 
@@ -56,7 +72,7 @@ lsf.str("package:labelMe")
 
 The above function, and the helper functions involved in running it were authored by Gabriela Morgenshtern, using the Shiny R package, and with help structuring the app from the Shiny tutorial found on steps 1-6 here: (https://shiny.rstudio.com/tutorial/)
 
-Thanks to Dr. Boris Steipe for providing the skeleton setup for this package through his own template (https://github.com/hyginn/rpt), specific examples of his contribution are denoted in the code. Code for testing Shiny app was borrowed from a Shinytest tutorial by Ferand Dalatieh, specific examples of his contribution are denoted in the code
+Thanks to Dr. Boris Steipe for providing the skeleton setup for this package through his own template (https://github.com/hyginn/rpt), specific examples of his contribution are denoted in the code. Code for testing Shiny app was borrowed from a Shinytest tutorial by Ferand Dalatieh, specific examples of his contribution are denoted in the code. Starter code for the logic pertaining to saving dataframe information to CSV was found from Lisa DeBruine (https://gupsych.github.io/tquant/data-input.html)
 
 The rest of the contribution is made by Gabriela.
 

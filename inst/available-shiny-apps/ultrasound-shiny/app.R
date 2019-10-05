@@ -27,9 +27,9 @@ ui <- fluidPage(
     position = "right",
 
     sidebarPanel(
-      downloadButton('download',"Download labels.csv"),
       h3("Images"),
       br(),
+      p("The list of uploaded images will go here"),
       br(),
       # Image directory upload:
       # returns dataframe! easy to work with :D
@@ -38,7 +38,11 @@ ui <- fluidPage(
         multiple = TRUE,
         label = 'Upload Images',
         accept = c('image/png', 'image/jpeg', 'image/jpg', 'image/pdf'),
-        width = '80%')
+        width = '80%'),
+      fluidRow(
+        actionButton("saveLabels", "Save selected labels"),
+        downloadButton('download',"Download labels.csv")
+      )
     ),
 
 
@@ -53,19 +57,15 @@ ui <- fluidPage(
       br(),
       br(),
 
-      # Image display layout:
-
       # Radio buttons for labeling:
-      # may need to change to inputselect for Lauren
-      # createImageDisplays() should automate this away
       fluidRow(
         column(3, offset = 1, imageOutput("img1")),
         column(3, offset = 1,
-               radioButtons(inputId = "radio1", label = textOutput("imgName"),
+               radioButtons(inputId = "radio1",
+                            label = textOutput("imgName"),
                             choices = LABELS, selected = character(0)))
       ),
       textOutput("selected_radio1")
-
     )
 
 
@@ -74,22 +74,31 @@ ui <- fluidPage(
 )
 
 
-# 2. Define server logic required to upload and display our images
+# 2. Define server logic required to upload and display images
 server <- function(input, output){
-
-  # Example dataset
-  # TO DO: input the labels data here (currently a test dataset)
-  # keys <- reactive({input$imageUpload$name})
-  data <- data.frame(key = 1, label = 1, row.names = 1, stringsAsFactors = FALSE)
+  data <- data.frame(matrix(nrow=1,ncol=2))
+  colnames(data) <- c("key", "label")
 
   output$imgName <- renderText({paste(input$imageUpload$name)})
 
   output$img1 <- renderImage(
-                    {list(src = input$imageUpload$datapath)},
+                    {list(src = input$imageUpload$datapath,
+                          alt = "Please upload an image using the file browser
+                          to your right")},
                     deleteFile = FALSE)
 
-  # to delete (reroute output to CSV):
+  # Visually validate the selection:
   output$selected_radio1 <- renderText({paste("You have selected", input$radio1)})
+
+  # The following of the observeEvent function was taken from Data Input in R/Shiny
+  # by Lisa DeBruine
+  # https://gupsych.github.io/tquant/data-input.html
+  observeEvent(input$saveLabels, {
+    var <- input$radio1
+    if (length(var) > 1 ) {
+      data[input$imageUpload$name] <- list(var)
+    }
+  })
 
   # Download a file with the name labels-DATE.csv
   output$download <- downloadHandler(
@@ -104,7 +113,5 @@ server <- function(input, output){
 }
 
 
-# This call to shinyApp will serve the Shiny app
+# Serve the Shiny app
 shinyApp(ui = ui, server = server)
-
-# runApp("shiny", display.mode = "showcase") <-- show the app w the relevant setup code alongside it

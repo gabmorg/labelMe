@@ -9,3 +9,18 @@ X put devtools::install_github("gabmorg/labelMe") on discussion board
 
 - delete /dev directory or add to gitignore for the 4th
 The `./dev` directory. I use this directory to keep all files and assets that I need for development, but that should not be included and distributed in the final package. The directory is mentioned in `.Rbuildignore`. In `rpt` it contains `./dev/functionTemplate.R`, a template file for writing R functions with a Roxygen2 header, and `./dev/rptTwee.R`, which was discussed above.
+
+ -
+
+
+  # TO FIX the single-image thing
+  # output$imageList <- renderTable({
+  #  for(i in 1:length(input$imageUpload[,1])){
+  #    images <- list()
+  #     images[[i]] <- renderImage(input$imageUpload$datapath)
+  #   }
+  # })
+
+  setLabels <- function(labelingList) {
+       pkg.globals$data_path <- path
+     }
