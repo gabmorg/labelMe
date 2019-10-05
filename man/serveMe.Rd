@@ -3,6 +3,9 @@
 \name{serveMe}
 \alias{serveMe}
 \title{Run the labelMe webapp - user facing function}
+\source{
+"setGlobalVariables.R"
+}
 \usage{
 serveMe(labelingList)
 }

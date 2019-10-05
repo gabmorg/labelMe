@@ -1,29 +1,19 @@
-# This script contains the 3 core components of a Shiny app:
-# a user interface object
-#
-# a server function
-#
-# a call to the shinyApp function
+#' Build the labelMe webapp - backend script (not exported)
+#'
+#'# This script contains the 3 core components of a Shiny app:
+#'a user interface object
+#'a server function
+#'a call to the shinyApp function
+#'
+#' @return None. Side effect of calling the function is the running of the
+#' Shiny webapp defined in inst/available-shiny-apps/ultrasound-shiny/app.R
+#'
+#' @import shiny
+#' @import htmltools
+#' @import shinyFiles
+#' @source "helpers.R"
 
-# TO REMOVE BEFORE SUBMISSION:
-if (!require(shiny, quietly = TRUE)) {
-  install.packages("shiny")
-  library(shiny)
-}
-
-if (!require(shinyFiles, quietly = TRUE)) {
-  install.packages("shinyFiles")
-  library(shinyFiles)
-}
-
-if (!require(htmltools, quietly = TRUE)) {
-  install.packages("htmltools")
-  library(htmltools)
-}
-
-source("helpers.R")
-
-# Define UI for app that stores image labels ----
+# 1. Define UI for app that stores image labels
 ui <- fluidPage(
 
   # TO DO:
@@ -72,8 +62,7 @@ ui <- fluidPage(
         column(3, offset = 1, imageOutput("img1")),
         column(3, offset = 1,
                radioButtons(inputId = "radio1", label = textOutput("imgName"),
-                            choices = list("Label 1", "Label 2",
-                                           "Unknown"), selected = character(0)))
+                            choices = LABELS, selected = character(0)))
       ),
       textOutput("selected_radio1")
 
@@ -85,37 +74,22 @@ ui <- fluidPage(
 )
 
 
-# Define server logic required to upload and display our images
+# 2. Define server logic required to upload and display our images
 server <- function(input, output){
 
   # Example dataset
   # TO DO: input the labels data here (currently a test dataset)
   # keys <- reactive({input$imageUpload$name})
-
   data <- data.frame(key = 1, label = 1, row.names = 1, stringsAsFactors = FALSE)
 
   output$imgName <- renderText({paste(input$imageUpload$name)})
-
-  # observer: print(input$imageUpload)
 
   output$img1 <- renderImage(
                     {list(src = input$imageUpload$datapath)},
                     deleteFile = FALSE)
 
-
-
-  # TO FIX
-  # output$imageList <- renderTable({
-  #  for(i in 1:length(input$imageUpload[,1])){
-  #    images <- list()
-  #     images[[i]] <- renderImage(input$imageUpload$datapath)
-  #   }
-  # })
-
-  # to delete:
+  # to delete (reroute output to CSV):
   output$selected_radio1 <- renderText({paste("You have selected", input$radio1)})
-
-
 
   # Download a file with the name labels-DATE.csv
   output$download <- downloadHandler(

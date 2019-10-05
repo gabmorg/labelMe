@@ -1,4 +1,3 @@
-library(shiny)
 #' Run the labelMe webapp - user facing function
 #'
 #' A function that allows a user to set their desired webapp parameters
@@ -16,8 +15,11 @@ library(shiny)
 #'
 #' @export
 #' @import shiny
+#' @source "setGlobalVariables.R"
 
  serveMe <- function(labelingList) {
+
+   # INSERT SOURCE BLOG POST
    appDir <- system.file("available-shiny-apps",
                          "ultrasound-shiny",
                          package = "labelMe")
@@ -25,6 +27,13 @@ library(shiny)
      stop("Could not find app directory. Try re-installing `labelMe`.", call. = FALSE)
    }
 
-   shiny::runApp(appDir, display.mode = "normal")
+   else {
+    # Pass the input variable (the desired labels for images) to labelMe
+    # https://community.rstudio.com/t/pass-variables-to-shiny-app/1950
+     .GlobalEnv$LABELS <- labelingList
+     shiny::runApp(appDir, display.mode = "normal")
+   }
+
+   on.exit(rm(LABELS, envir=.GlobalEnv))
 }
 
