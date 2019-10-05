@@ -12,6 +12,10 @@
 #' @import htmltools
 #' @import shinyFiles
 #' @source "helpers.R"
+#' @source "setGlobalVariables.R"
+
+# Global variable default set here for testthat purposes only:
+LABELS <- list("test label1", "test label2", "unknown")
 
 # 1. Define UI for app that stores image labels
 ui <- fluidPage(
@@ -32,7 +36,6 @@ ui <- fluidPage(
       p("The list of uploaded images will go here"),
       br(),
       # Image directory upload:
-      # returns dataframe! easy to work with :D
       fileInput(
         inputId = 'imageUpload',
         multiple = TRUE,
