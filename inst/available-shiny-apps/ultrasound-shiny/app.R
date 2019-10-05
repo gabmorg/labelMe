@@ -40,8 +40,7 @@ ui <- fluidPage(
         inputId = 'imageUpload',
         multiple = TRUE,
         label = 'Upload Images',
-        accept = c('image/png', 'image/jpeg', 'image/jpg', 'image/pdf'),
-        width = '80%'),
+        accept = c('image/png', 'image/jpeg', 'image/jpg', 'image/pdf')),
       fluidRow(
         actionButton("saveLabels", "Save selected labels"),
         downloadButton('download',"Download labels.csv")
