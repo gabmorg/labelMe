@@ -4,14 +4,12 @@
 # (https://www.r-bloggers.com/unit-testing-shiny-apps-using-testthat/)
 # Note: this is currently all extremely broken (the actual testing functions are hard
 # to adapt for shinytest/testthant integration, the code loads)
-library(shinytest)
-library(testthat)
-library(labelMe)
 
 # context("Shiny app test")
 #
 # # open Shiny app and PhantomJS
 # app <- ShinyDriver$new("./inst/available-shiny-apps/ultrasound-shiny")
+
 
 # test_that("labels set as radioButtons match visual confirmation text", {
 #   # set value of radioButtons to 1st choice
