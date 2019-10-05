@@ -21,7 +21,7 @@
 ## 1.1 Overview
 `labelMe` is a package allowing clinicians with test image data that requires manual labeling (ex. ultrasounds) to easily spin up a local webapp to do so, protecting the data's privacy while enabling the interactive convenience of the browser as a platform for this task. This is particularly useful to those who work with image-labeling or -recognition algorithms.
 
-![](./inst/extdata/MORGENSHTERN_G_A1.pdf)
+![](./inst/extdata/MORGENSHTERN_G_A1.png)
 
 &nbsp;
 
