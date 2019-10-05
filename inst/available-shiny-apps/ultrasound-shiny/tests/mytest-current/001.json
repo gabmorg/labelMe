@@ -1,0 +1,18 @@
+{
+  "input": {
+    "imageUpload": null,
+    "saveLabels": 0
+  },
+  "output": {
+    "img1": {
+      "message": "a character vector argument expected",
+      "call": "basename(file)",
+      "type": null
+    },
+    "imgName": "",
+    "selected_radio1": "You have selected "
+  },
+  "export": {
+
+  }
+}
