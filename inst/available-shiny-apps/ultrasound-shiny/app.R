@@ -40,6 +40,7 @@ ui <- fluidPage(
         inputId = 'imageUpload',
         multiple = TRUE,
         label = 'Upload Images',
+        placeholder = "Choose images to label",
         accept = c('image/png', 'image/jpeg', 'image/jpg', 'image/pdf')),
       fluidRow(
         actionButton("saveLabels", "Save selected labels"),
@@ -53,15 +54,14 @@ ui <- fluidPage(
       # Instructions for user:
       h3("Labeling Task"),
       p("Label each of the images below by selecting one of the provided lables."),
-      em("Note that, unless you're selecting the option ",
-        strong("unknown,"), "each image should have a different label, as each image represents
-        a different view of the same ultrasound object (ex. the same kidney)"),
+      p("After selecting the desired labels, click",
+        em("\"Save selected labels\"", "and then", em("\"Download labels.csv\""))),
       br(),
       br(),
 
       # Radio buttons for labeling:
       fluidRow(
-        column(3, offset = 1, imageOutput("img1")),
+        column(8, offset = 1, imageOutput("img1", width = "25%", inline = TRUE)),
         column(3, offset = 1,
                radioButtons(inputId = "radio1",
                             label = textOutput("imgName"),
