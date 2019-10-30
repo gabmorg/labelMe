@@ -25,7 +25,7 @@ ui <- fluidPage(
   titlePanel("labelMe: Manual Labelling for Clinical Imaging"),
   # Arrow navigation between images:
   tags$script('
-              $(document).on("keydown", function (e) {
+              $(document).on("keydown", function(e) {
                 key = e.which;
                 if(key === 39) {
                   Shiny.onInputChange("rightArrow", [e.which, e.timeStamp]);
@@ -33,6 +33,7 @@ ui <- fluidPage(
                 else if(key === 37) {
                   Shiny.onInputChange("leftArrow", [e.which, e.timeStamp]);
                 }
+
               });
               '),
   sidebarLayout(
@@ -51,42 +52,71 @@ ui <- fluidPage(
     mainPanel(
       uiOutput('images'),
       uiOutput('radios'),
+      textOutput("radioSelection"),
       br(),
       h3("Images Uploaded"),
       br(),
-      tableOutput('files')
+      tableOutput('fileTable')
     )
   )
 )
 
 server <- shinyServer(function(input, output) {
   imagePages <- reactiveValues(page = 1)
-  output$files <- renderTable(input$files)
+  output$fileTable <- renderTable(input$files)
+
+  # pagination navigation helper:
   navigate <- function(direction) {
     imagePages$page <- imagePages$page + direction
   }
 
+  # access via files()
   files <- reactive({
     files <- input$files
     files$image_key <- c(1:nrow(input$files))
     files$datapath <- gsub("\\\\", "/", files$datapath)
+    files$label <- selectedOption()
     files
   })
 
+
+  # paginated images setup for uiOutput('images')
   output$images <- renderUI({
     if(is.null(input$files)) return(NULL)
-    imageName <- paste0("image", imagePages$page)
-    imageOutput(imageName)
+    else {
+      imageId <- paste0("image", imagePages$page)
+      imageOutput(imageId)
+    }
   })
 
+  # paginated radio button setup for uiOutput('radios')
+  output$imgName <- renderText({files()$name[imagePages$page]})
   output$radios <- renderUI({
     if(is.null(input$files)) return(NULL)
-    radioName <- paste0("radio", imagePages$page)
-    radioButtons(inputId = radioName,
-                 label = textOutput(imageName),
-                 choices = c("Saggital", "Transverse", "Unknown"), selected = character(0))
+    else {
+    radioId <- paste0("radio", imagePages$page)
+    radioButtons(inputId = radioId,
+                 label = textOutput("imgName"),
+                 choices = c("Saggital", "Transverse", "Unknown"), selected = "Unknown")
+    }
   })
 
+  # visual confirmation of selected radio button option (default is Unknown)
+  selectedOption <- reactive({
+    if(is.null(input$files)) {
+      return("NULL")
+    }
+    else {
+      radioId <- paste0("radio", imagePages$page)
+      print(input$radioId)
+      input$radioId
+    }
+  })
+
+
+  output$radioSelection <- renderText({paste0("Image label: ", selectedOption())})
+
+  # Paginated image rendering - From SO post: [LINK]
   observe({
     if(is.null(input$files)) return(NULL)
     for (i in 1:nrow(files())) {
@@ -102,19 +132,20 @@ server <- shinyServer(function(input, output) {
               alt = "Image upload failed!"
             )
           }, deleteFile = FALSE)
-      })
 
+      })
     }
   })
 
+  # Arrow navigation between pages:
   observeEvent(input$rightArrow,{
-    if(imagePages$page <= nrow(files())){
+    if(imagePages$page < nrow(files())){
       navigate(1)
     }
     else navigate(0)
 
     # TO DELETE: bug tracking
-    print(imagePages$page)
+    # print(imagePages$page)
   })
 
   observeEvent(input$leftArrow,{
@@ -124,10 +155,12 @@ server <- shinyServer(function(input, output) {
     else navigate(0)
 
     # TO DELETE: bug tracking
-    print(imagePages$page)
+    # print(imagePages$page)
   })
 
   # Download a file with the name labels-DATE.csv
+  # the contents are equal to the contents of the data table
+  # displayed on the user interface
   output$download <- downloadHandler(
     filename = function(){
       paste(Sys.Date(),"-labels", ".csv", sep="")
