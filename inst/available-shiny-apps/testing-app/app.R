@@ -1,24 +1,3 @@
-# ui <- fluidPage(
-#   titlePanel("Multiple file uploads"),
-#   # sidebarLayout(
-#   #   sidebarPanel(
-#   #     fileInput("csvs",
-#   #               label="Upload CSVs here",
-#   #               multiple = TRUE)
-#   #   ),
-#     mainPanel(
-#       shinyDirButton('folder', 'Folder select', 'Please select a folder', FALSE)
-#     )
-#   )
-# # )
-#
-# server <- function(input, output) {
-#   shinyDirChoose(input, 'folder', roots=c(home = "~"), filetypes=c('pdf', 'png', 'jpeg', 'jpg'))
-#
-# }
-#
-# shinyApp(ui = ui, server = server)
-
 # TO DO: add DICOM files support
 ui <- fluidPage(
 
