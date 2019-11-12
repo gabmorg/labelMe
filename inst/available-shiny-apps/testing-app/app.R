@@ -152,31 +152,58 @@ server <- shinyServer(function(input, output) {
     )}
   })
 
-  # Visual confirmation of selected radio button option (default is Unknown)
-  # this code also attaches the label to selectiondf,
+  # Records selections in selectiondf
   # which is updated whenever a radio button option is selected at
   # the row corresponding to the image page
-  # i.e. this expression is reactive on input[[radioIdA]], input[[radioIdB]]
+  # i.e. this expression is reactive on:
+  # input[[radioIdA]], input[[radioIdB]], imagePages$page
   selectedOption <- reactive({
-    if (is.null(input$files)) {
-      return("NULL")
+    radioIdA <- paste0("radioA", imagePages$page)
+    radioIdB <- paste0("radioB", imagePages$page)
+
+    selectiondf$df[imagePages$page, "image_key"] <- imagePages$page
+    selectiondf$df[imagePages$page, "image_name"] <- files()$name[imagePages$page]
+    selectiondf$df[imagePages$page, "label_1"] <- input[[radioIdA]]
+    selectiondf$df[imagePages$page, "label_2"] <- input[[radioIdB]]
+
+    # Debug print (to console):
+    print(paste0("Image label: ", input[[radioIdA]], ", ", input[[radioIdB]]))
+
+    return(
+      c(selectiondf$df[imagePages$page, "label_1"],
+        selectiondf$df[imagePages$page, "label_2"]))
+
     }
-    else {
-      radioIdA <- paste0("radioA", imagePages$page)
-      radioIdB <- paste0("radioB", imagePages$page)
 
-      selectiondf$df[imagePages$page, "image_key"] <- imagePages$page
-      selectiondf$df[imagePages$page, "image_name"] <- files()$name[imagePages$page]
-      selectiondf$df[imagePages$page, "label_1"] <- input[[radioIdA]]
-      selectiondf$df[imagePages$page, "label_2"] <- input[[radioIdB]]
+    # else {
+    #   selectiondf$df[imagePages$page, "image_key"] <- imagePages$page
+    #   selectiondf$df[imagePages$page, "image_name"] <- files()$name[imagePages$page]
+    #   selectiondf$df[imagePages$page, "label_1"] <- input[[radioIdA]]
+    #   selectiondf$df[imagePages$page, "label_2"] <- input[[radioIdB]]
+    #
+    #   # Debug print (to console):
+    #   print(paste0("Image label: ", input[[radioIdA]], ", ", input[[radioIdB]]))
+    #
+    #   return(
+    #     c(selectiondf$df[imagePages$page, "label_1"],
+    #       selectiondf$df[imagePages$page, "label_2"])
+    #   )
+    # }
 
-      # Debug print (in console):
-      print(paste0("Image label: ", input[[radioIdA]], input[[radioIdB]]))
+  )
 
-      return(c(input[[radioIdA]], input[[radioIdB]]))
-    }
-  })
+  # Triggers code above; when confirmation is on screen, that data
+  # has been entered into selectiondf
+  # Visual confirmation of selected radio button option (default is Unknown)
+  # this code also attaches the label to selectiondf
   output$radioSelection <- renderText({
+    input$flushData
+    radioIdA <- paste0("radioA", imagePages$page)
+    radioIdB <- paste0("radioB", imagePages$page)
+
+    req(input[[radioIdA]])
+    req(input[[radioIdB]])
+
     paste0("This image has been labeled: ",
            selectedOption()[1],
            ", ",
@@ -241,6 +268,8 @@ server <- shinyServer(function(input, output) {
     contentType = "text/csv"
   )
 
+  # Clean saved data from session
+  # Affects pagination, selectiondf, files()
   observeEvent(input$flushData, {
     for (i in 0:nrow(files())) {
       local({
@@ -250,11 +279,11 @@ server <- shinyServer(function(input, output) {
       })
     }
 
-    selectiondf$df <- data.frame(
-      image_key = c(1),
-      image_name = c("test image_name"),
-      label_1 = c("Unknown"),
-      label_2 = c("Not applicable"),
+    selectiondf$df <- selectiondf$df <- data.frame(
+      image_key = integer(),
+      image_name = character(),
+      label_1 = character(),
+      label_2 = character(),
       stringsAsFactors = FALSE
     )
 
