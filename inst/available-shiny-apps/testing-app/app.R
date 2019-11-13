@@ -229,6 +229,10 @@ server <- shinyServer(function(input, output) {
           }, deleteFile = FALSE)
 
       })
+      selectiondf$df[i, "image_key"] <- i
+      selectiondf$df[i, "image_name"] <- files()$name[i]
+      selectiondf$df[i, "label_1"] <- NA
+      selectiondf$df[i, "label_2"] <- NA
     }
   })
 
