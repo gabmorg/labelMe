@@ -1,7 +1,7 @@
 Package: labelMe
 Type: Package
 Title: Shiny webapp customizable template
-Version: 0.2.1.9000
+Version: 0.2.2.9000
 Date: 2019-09-26
 Authors@R: c(
              person("Boris", "Steipe", 
