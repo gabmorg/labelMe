@@ -1,0 +1,12 @@
+citHeader("To cite labelMe in publications use:")
+
+citEntry(
+  entry    = "Unpublished",
+  title    = "LabelMe",
+  author   = "Gabriela Morgenshtern",
+  year     = "2019",
+  note     = "Unpublished",
+  textVersion = paste(
+
+  )
+)
