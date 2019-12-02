@@ -1,0 +1,41 @@
+---
+title: "Introduction to the labelMe Package"
+author: "Gabriela Morgenshtern"
+date: "`r format(Sys.time(), '%d %b %Y')"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+  
+vignette: >
+  %\VignetteIndexEntry{Introduction_labelMe}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r}
+library(labelMe)
+```
+
+# Introduction
+
+**labelMe** is an R package for the preparation of a training dataset of ultrasound images for the purposes of an image labeling algorithm. In hospitals, this is commonly done manually, by opening and renaming each DICOM file. Here, the process allows the user to leverage the interface of a web browser, making the process significantly more streamlined and sustainable for the 1000s of labels they will have to prepare to train a given algorithm. It also runs entirely locally, so no need to worry about privacy measures for shielding patient data.
+
+# Data preparation
+
+# Labeling
+
+
+# References
+**TO DO** include references for code
+----
+
+```{r}
+sessionInfo()
+```

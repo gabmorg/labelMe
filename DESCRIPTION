@@ -14,7 +14,7 @@ Authors@R: c(
                     comment = c(ORCID = "0000-0003-4762-8797"))
     )
 Maintainer: Gabriela Morgenshtern <g.morgenshtern@mail.utoronto.ca>
-Description:A Shiny webapp template customizable by user-facing functions outlined in the vignettes.
+Description: A Shiny webapp template customizable by user-facing functions outlined in the vignettes.
              This package is made for the creation of a tool to support the manual labeling workflow
              required by image-based algorithms in clinical settings, like ultrasound labeling, for example. 
              The package produces a locally hosted Shiny webapp that’s study and image-type agnostic. 
@@ -34,4 +34,7 @@ Imports:
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Suggests: 
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

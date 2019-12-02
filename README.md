@@ -24,7 +24,7 @@
 # 1 About this package:
 
 ## 1.1 Description
-`labelMe` is a package allowing clinicians and developers with test image data that requires manual labeling (ex. ultrasounds) to easily spin up a local web application to do so, ensuring data privacy while enabling the interactive convenience of the browser as a platform for this task. This is particularly useful to those who work with image-recognition algorithms. A secondary tab shows a visualization that allows the user to compare the ratios of images they have labeled so far, so as to aid in creating a balanced test dataset from the labeling effort.
+`labelMe` is a package allowing clinicians and developers with test image data that requires manual labeling (ex. ultrasounds) to easily spin up a local web application to do so, ensuring data privacy while enabling the interactive convenience of the browser as a platform for this task. This is particularly useful to those who work with image-recognition algorithms. In hospitals, this is commonly a manual workflow, consisting of opening and renaming each DICOM file available for training. Here, the process is significantly more streamlined and sustainable for the 1000s of labels they will have to prepare to train a given algorithm. It also runs entirely locally, so no need to worry about privacy measures for shielding patient data. A secondary tab shows a visualization that allows the user to compare the ratios of images they have labeled so far, so as to aid in creating a balanced test dataset from the labeling effort.
 
 &nbsp;
 
@@ -48,10 +48,6 @@ browseVignettes("labelMe")
 ```
 This package contains 3 functions that facilitate the preparation of a training dataset of ultrasound images for the purposes of an image labeling algorithm. `startLabeling()` runs the generalized version of the application, and allows a user to specify the labels they desire for the application. `measureLabelRatios()` generates a chart visualizing the proportion of each label selected in the run of the application. `startLabelingGoldenberg()` is a production version of the generalized app, with pre-specified radio labels for specifically kidney ultrasound views. 
 Refer to package vignettes for more details. The package tree structure is provided below
-
-**PUT IN VIGNETTE**
-This package contains 3 functions that facilitate the preparation of a training dataset of ultrasound images for the purposes of an image labeling algorithm. In hospitals, this is commonly done manually, by opening and renaming each DICOM file. Here, the process allows the user to leverage the interface of a web browser, making the process significantly more streamlined and sustainable for the 1000s of labels they will have to prepare to train a given algorithm. It also runs entirely locally, so no need to worry about privacy measures for shielding patient data.
-
 ``` 
 --labelMe/
    |__DESCRIPTION
