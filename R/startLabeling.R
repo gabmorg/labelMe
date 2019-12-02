@@ -17,21 +17,21 @@
 #' @import shiny
 #' @source "setGlobalVariables.R"
 
- serveMe <- function(labelingList) {
-   appDir <- system.file("available-shiny-apps",
-                         "ultrasound-shiny",
-                         package = "labelMe")
-   if (appDir == "") {
-     stop("Could not find the ultrasound-shiny app. Try re-installing `labelMe`.", call. = FALSE)
-   }
+startLabeling <- function(labelingList) {
+  appDir <- system.file("available-shiny-apps",
+                        "ultrasound-shiny",
+                        package = "labelMe")
+  if (appDir == "") {
+    stop("Could not find the ultrasound-shiny app. Try re-installing `labelMe`.", call. = FALSE)
+  }
 
-   else {
+  else {
     # Pass the input variable (the desired labels for images) to labelMe
-     .GlobalEnv$LABELS <- labelingList
-     shiny::runApp(appDir, display.mode = "normal")
-   }
+    .GlobalEnv$LABELS <- labelingList
+    shiny::runApp(appDir, display.mode = "normal")
+  }
 
-   # Clear global environment after exiting app window
-   on.exit(rm(LABELS, envir=.GlobalEnv))
+  # Clear global environment after exiting app window
+  on.exit(rm(LABELS, envir=.GlobalEnv))
 }
 

@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 ^dev$
 ^inst/available-shiny-apps/testing-app/www/pt*
+^/R/rptTwee.R
