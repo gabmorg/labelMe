@@ -158,38 +158,21 @@ server <- shinyServer(function(input, output) {
   # i.e. this expression is reactive on:
   # input[[radioIdA]], input[[radioIdB]], imagePages$page
   selectedOption <- reactive({
-    radioIdA <- paste0("radioA", imagePages$page)
-    radioIdB <- paste0("radioB", imagePages$page)
+      radioIdA <- paste0("radioA", imagePages$page)
+      radioIdB <- paste0("radioB", imagePages$page)
 
-    selectiondf$df[imagePages$page, "image_key"] <- imagePages$page
-    selectiondf$df[imagePages$page, "image_name"] <- files()$name[imagePages$page]
-    selectiondf$df[imagePages$page, "label_1"] <- input[[radioIdA]]
-    selectiondf$df[imagePages$page, "label_2"] <- input[[radioIdB]]
+      selectiondf$df[imagePages$page, "image_key"] <- imagePages$page
+      selectiondf$df[imagePages$page, "image_name"] <- files()$name[imagePages$page]
+      selectiondf$df[imagePages$page, "label_1"] <- input[[radioIdA]]
+      selectiondf$df[imagePages$page, "label_2"] <- input[[radioIdB]]
 
-    # Debug print (to console):
-    print(paste0("Image label: ", input[[radioIdA]], ", ", input[[radioIdB]]))
+      # Debug print (to console):
+      print(paste0("Image label: ", input[[radioIdA]], ", ", input[[radioIdB]]))
 
-    return(
-      c(selectiondf$df[imagePages$page, "label_1"],
-        selectiondf$df[imagePages$page, "label_2"]))
-
+      return(
+        c(selectiondf$df[imagePages$page, "label_1"],
+          selectiondf$df[imagePages$page, "label_2"]))
     }
-
-    # else {
-    #   selectiondf$df[imagePages$page, "image_key"] <- imagePages$page
-    #   selectiondf$df[imagePages$page, "image_name"] <- files()$name[imagePages$page]
-    #   selectiondf$df[imagePages$page, "label_1"] <- input[[radioIdA]]
-    #   selectiondf$df[imagePages$page, "label_2"] <- input[[radioIdB]]
-    #
-    #   # Debug print (to console):
-    #   print(paste0("Image label: ", input[[radioIdA]], ", ", input[[radioIdB]]))
-    #
-    #   return(
-    #     c(selectiondf$df[imagePages$page, "label_1"],
-    #       selectiondf$df[imagePages$page, "label_2"])
-    #   )
-    # }
-
   )
 
   # Triggers code above; when confirmation is on screen, that data

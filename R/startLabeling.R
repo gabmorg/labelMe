@@ -1,28 +1,35 @@
-#' Run the labelMe webapp - user facing function
+#' Launch the labelMe webapp - user facing function
 #'
 #' A function that allows a user to set their desired webapp parameters
-#' and serves a shiny web application. The structure of this function was
-#' inspired by code snippet found at Dean Attali's blog post titled
-#' "Supplementing your R package with a Shiny app"
-#' (https://deanattali.com/2015/04/21/r-package-shiny-app/)
+#' and serves a shiny web application.
 #'
-#' @param labelingList A list of strings denoting the labels that
+#' @param labelingList A 2D list of strings denoting the labels that
 #' the user would like to have as options for the image labeling task
 #'
 #' @return None. Side effect of calling the function is the running of the
 #' Shiny webapp defined in inst/available-shiny-apps/ultrasound-shiny/app.R
 #'
+#' @examples
+#' \dontrun{
+#' startLabeling()
+#' }
 #'
 #' @export
-#' @import shiny
+#' @importFrom shiny runApp
 #' @source "setGlobalVariables.R"
+#'
+#' @references
+#' Attali, D. (2015 April 21). Supplementing your R package with a Shiny app. Retrieved from
+#' \href{https://deanattali.com/2015/04/21/r-package-shiny-app/}{Link}
+#'
 
 startLabeling <- function(labelingList) {
   appDir <- system.file("available-shiny-apps",
                         "ultrasound-shiny",
                         package = "labelMe")
   if (appDir == "") {
-    stop("Could not find the ultrasound-shiny app. Try re-installing `labelMe`.", call. = FALSE)
+    stop("Could not find the ultrasound-shiny app. Try re-installing `labelMe`.",
+         call. = FALSE)
   }
 
   else {

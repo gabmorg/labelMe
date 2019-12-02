@@ -29,27 +29,43 @@ library(labelMe)
 
 # Data preparation
 
-Currently, the application accepts standard MIME image types: png, jpeg, jpg, pdf; DICOM images must be converted before upload.
+Currently, the application accepts these standard MIME image types: png, jpeg, jpg; DICOM images must be converted before upload.
 
-Data can be uploaded all at once, as the application supports hosting of several thousand images. However, it is recomended that you instead work in chunks of data that you intend to complete within the course of 1 session, ideally organized sequentially by patient. This is due to the navigation design of the application, which is entirely based on the arrow keys.
-Actual upload of the data is done within the session, by interaction with the file browser input on the right-hand panel of the interface.
+Data can be uploaded all at once, as the application can support hosting of several thousand images. However, it is recomended that you instead work in chunks of data that you intend to complete within the course of 1 session, ideally organized sequentially by patient. This is due to the navigation design of the application, which is entirely based on the arrow keys, optimized for speed of labeling.
+Upload of the data is done within the session, by interaction with the file browser input on the right-hand side panel of the interface.
 
 # Labeling
 
 Labels are specified on session startup, and can currently support 2 label classes of arbitrary length (2 radio button columns with as many choices as you'd like). 
 
-Select a label to pertain to an image by pressing a radio label on each of the columns; this automatically saves your selection to the session's data storage. Navigate between images using the right/left arrow keys until you've completed image labeling. Note that your selection is confirmed by the text displayed immediately below the image `Image label: X, Y`
+Select a label to pertain to an image by pressing a radio label on each of the columns; this automatically saves your selection to the session's data storage. Navigate between images using the right/left arrow keys until you've completed image labeling. Note that your selection is confirmed by the text displayed immediately below the image `This image has been labeled: X, Y` (where X and Y are your radio button selections), immediately after completing the selection. This confirms that your label has been stored.
 
 # Data Export and Flushing
 Once you have completed the labeling, click the ```"Download DATE-labels.csv"``` button to download the CSV to your local machine. If the application is open in your web browser, a file named `DATE-labels.CSV` (where `DATE` is replaced by `YYYY-MM-DD`) will be saved to your Downloads folder.
 
-To repeat the labeling effort with the same labels but new images, click the ```"Flush Data"``` button on the right-side panel to remove labeled images from the (local) server 
+To repeat the labeling effort with the same labels but new images, click the ```"Flush Data"``` button on the right-side panel to remove labeled images and all their associated data from the session. Labels are no longer stored or available after flushing, so ensure data export is done prior to flushing.
 
 # Tracking Label Proportions
+
 ## Within app session
+Tracking label proportions is possible in the `Label Proportions` tab of the webapp. Simply navigate to the tab and click `Update` to view the current labeling proportions of your uploaded dataset.
 
 ## Outside of app session
 
+```{r}
+# Creating test data 
+# In the webapp, a compatible CSV is automatically generated:
+exampleDF <- data.frame(
+    image_key = c(1,2,3,4),
+    label_1 = c("Saggital", "Saggital", "Transverse", "Bladder"),
+    label_2 = c("Right", "Right", "Left", "NA")
+)
+
+# Viewing the data proportions:
+getLabelProportions(exampleDF)
+```
+
+If you have another CSV prepared, have a serialized a dataset to analyze, or have already exited the app after data export, you can simply convert the CSV to a dataframe (for example, via `as.data.frame()`) and proceed as above
 
 # References
 **TO DO** include references for code

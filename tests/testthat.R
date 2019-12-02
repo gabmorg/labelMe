@@ -1,4 +1,4 @@
-library(shinytest)
+
 library(testthat)
 library(labelMe)
 
