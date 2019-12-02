@@ -25,11 +25,30 @@ library(labelMe)
 
 # Introduction
 
-**labelMe** is an R package for the preparation of a training dataset of ultrasound images for the purposes of an image labeling algorithm. In hospitals, this is commonly done manually, by opening and renaming each DICOM file. Here, the process allows the user to leverage the interface of a web browser, making the process significantly more streamlined and sustainable for the 1000s of labels they will have to prepare to train a given algorithm. It also runs entirely locally, so no need to worry about privacy measures for shielding patient data.
+**labelMe** is an R package for the preparation of a training dataset of ultrasound images for the purposes of an image labeling algorithm. In hospitals, this is commonly done manually, by opening and renaming each DICOM file. Here, the process allows the user to leverage the interface of a web browser, making the process significantly more streamlined and sustainable for the 1000s of labels they will have to prepare to train a given algorithm. It also runs entirely locally, so no need to worry about privacy measures for shielding patient data. 
 
 # Data preparation
 
+Currently, the application accepts standard MIME image types: png, jpeg, jpg, pdf; DICOM images must be converted before upload.
+
+Data can be uploaded all at once, as the application supports hosting of several thousand images. However, it is recomended that you instead work in chunks of data that you intend to complete within the course of 1 session, ideally organized sequentially by patient. This is due to the navigation design of the application, which is entirely based on the arrow keys.
+Actual upload of the data is done within the session, by interaction with the file browser input on the right-hand panel of the interface.
+
 # Labeling
+
+Labels are specified on session startup, and can currently support 2 label classes of arbitrary length (2 radio button columns with as many choices as you'd like). 
+
+Select a label to pertain to an image by pressing a radio label on each of the columns; this automatically saves your selection to the session's data storage. Navigate between images using the right/left arrow keys until you've completed image labeling. Note that your selection is confirmed by the text displayed immediately below the image `Image label: X, Y`
+
+# Data Export and Flushing
+Once you have completed the labeling, click the ```"Download DATE-labels.csv"``` button to download the CSV to your local machine. If the application is open in your web browser, a file named `DATE-labels.CSV` (where `DATE` is replaced by `YYYY-MM-DD`) will be saved to your Downloads folder.
+
+To repeat the labeling effort with the same labels but new images, click the ```"Flush Data"``` button on the right-side panel to remove labeled images from the (local) server 
+
+# Tracking Label Proportions
+## Within app session
+
+## Outside of app session
 
 
 # References

@@ -128,13 +128,21 @@ This package was developed as part of an assessment for 2019 BCB410H: Applied Bi
 # 2 Notes 
 ## 2.1 To test functionality
 
-**TL;DR: Organize your imaging files in a single directory, or group them into several easily-accessible directories. Then, install the package, use the `serveMe()` function to set your desired labels and run your webapp locally, scrolling between images via the left/right arrow keys**
+**TL;DR: Organize your imaging files in a single directory, or group them into several easily-accessible directories. Then, install the package, use the `startLabeling()` function to set your desired labels and run your webapp locally, scrolling between images via the left/right arrow keys**
 
 1. Save the following images to your local machine:
 ![](./inst/extdata/pt1234_12.jpg)
 ![](./inst/extdata/pt_1234_11.jpg)
 
-2. Call ```labelMe::serveMe(list("test label1", "test label2"))``` to launch the test app (replacing the strings with whatever labels you'd like to apply to the images)
+2. To launch the test app (replacing the strings with whatever labels you'd like to apply to the images)
+
+```
+labelMe::startLabeling(list(
+                        list("test label1A", "test label 1B"), 
+                        list("test label2A", "test label 2B")
+                        )
+                      )
+```
 
 ## 2.2 To use during workshop
 1. Note where images for labeling are located on your local machine
