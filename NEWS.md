@@ -1,6 +1,7 @@
 # labelMe 0.2.X
 ## labelMe 0.2.3.9000
 * Added visualization to Shiny application that allows user to check the proportion of data labels they have made
+* Added input sanitization to startLabeling
 
 ## labelMe 0.2.2.9000
 * Added a `NEWS.md` file to track changes to the package.
