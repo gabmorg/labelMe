@@ -11,14 +11,15 @@
 #'
 #' @examples
 #' \dontrun{
-#' startLabeling()
+#' labels <- list(list("test label1", "test label2"), list("test label12", "test label22"))
+#' startLabeling(labels)
 #' }
 #'
 #' @export
 #' @importFrom shiny runApp
 #' @source "setGlobalVariables.R"
 #'
-#' @references
+#'@references
 #' Attali, D. (2015 April 21). Supplementing your R package with a Shiny app. Retrieved from
 #' \href{https://deanattali.com/2015/04/21/r-package-shiny-app/}{Link}
 #'
@@ -33,6 +34,31 @@ startLabeling <- function(labelingList) {
   }
 
   else {
+    # Checking that input is a list
+    if(!is.list(labelingList)) {
+      stop("Input must be a list of 2 lists,
+           one for each group of radio button options")
+    }
+
+    # Checking input list is the right length
+    else if(!length(labelingList) == 2) {
+      stop("Input must be a list of 2 lists,
+           one for each group of radio button options")
+    }
+
+    # Checking that all the labels are unique
+    if(length(unique(unlist(labelingList[1]))) !=
+       length(unlist(labelingList[1]))) {
+      stop("ERROR: Found repeating label in list 1,
+              please remove duplicates and try again")
+    }
+
+    else if(length(unique(unlist(labelingList[2]))) !=
+            length(unlist(labelingList[2]))) {
+      stop("ERROR: Found repeating label in list 2,
+              please remove duplicates and try again")
+    }
+
     # Pass the input variable (the desired labels for images) to labelMe
     .GlobalEnv$LABELS <- labelingList
     shiny::runApp(appDir, display.mode = "normal")

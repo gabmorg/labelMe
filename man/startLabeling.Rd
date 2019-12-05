@@ -23,7 +23,8 @@ and serves a shiny web application.
 }
 \examples{
 \dontrun{
-startLabeling()
+labels <- list(list("test label1", "test label2"), list("test label12", "test label22"))
+startLabeling(labels)
 }
 
 }

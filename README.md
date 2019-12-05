@@ -111,13 +111,13 @@ The rest of the contributions are made by Gabriela.
 
 ## References
 
-**TO DO** Full APA for all sources
+* Attali, D. (2015 April 21). Supplementing your R package with a Shiny app. Retrieved from
+https://deanattali.com/2015/04/21/r-package-shiny-app/
+
 * Laurent, S. (2019 September 11). Render images for interactive display from folder loaded with shinyDirChoose [StackOverflow page]. Retrieved from https://stackoverflow.com/questions/57891201/render-images-for-interactive-display-from-folder-loaded-with-shinydirchoose
 
 * Steipe, B. (2019). rpt (R Package Template) [Github page]. Retrieved from https://github.com/hyginn/rpt
 
-* R Shiny tutorials!
-* Review code files for more things to review 
 
 ## Acknowledgements
 

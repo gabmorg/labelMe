@@ -8,6 +8,11 @@
 #' @return None. Side effect of calling the function is the running of the
 #' Shiny webapp defined in inst/available-shiny-apps/ultrasound-shiny/app.R
 #'
+#' @references
+#' Laurent, S. (2019 September 11). Render images for interactive display from folder loaded with shinyDirChoose [StackOverflow page]
+#' Retrieved from
+#' \href{https://stackoverflow.com/questions/57891201/render-images-for-interactive-display-from-folder-loaded-with-shinydirchoose}{Link}
+#'
 #' @import shiny
 #' @import htmltools
 #' @import plotly
@@ -46,10 +51,7 @@ ui <- fluidPage(
                            uiOutput('images'),
                            textOutput("radioSelection"),
                            uiOutput('radios')),
-                  tabPanel("Label Proportions",
-                           plotlyOutput("proportionPlot"),
-                           h3("Images Uploaded"),
-                           br(),
+                  tabPanel("Uploaded Files",
                            tableOutput('fileTable'))
       )
     )
@@ -192,9 +194,6 @@ server <- shinyServer(function(input, output) {
   }
   )
 
-  output$plot <- renderPlotly({
-    getLabelProportions(selectiondf$df)$pie_chart
-  })
 
   # Triggers code above; when confirmation is on screen,
   # that data has been entered into selectiondf
@@ -214,7 +213,7 @@ server <- shinyServer(function(input, output) {
            selectedOption()[2])
   })
 
-  # Paginated image rendering - From SO post: [LINK]
+  # Paginated image rendering - (Laurent, 2019)
   observeEvent(input$files, {
     if (is.null(input$files))
       return(NULL)
@@ -247,9 +246,6 @@ server <- shinyServer(function(input, output) {
     }
     else
       navigate(0)
-
-    # TO DELETE: bug tracking
-    message(imagePages$page)
   })
 
   observeEvent(input$leftArrow, {
@@ -258,9 +254,6 @@ server <- shinyServer(function(input, output) {
     }
     else
       navigate(0)
-
-    # TO DELETE: bug tracking
-    print(imagePages$page)
   })
 
   # Download a file with the name labels-DATE.csv
