@@ -48,7 +48,7 @@ To repeat the labeling effort with the same labels but new images, click the ```
 # Tracking Label Proportions
 
 ## Within app session
-Tracking label proportions is possible in the `Label Proportions` tab of the webapp. Simply navigate to the tab and click `Update` to view the current labeling proportions of your uploaded dataset.
+Tracking label proportions is not yet possible in the webapp. Simply view summary stats related to your labeling, export the data and load the CSV as a dataframe for the getLabelProportions() function (see code in the section below).
 
 ## Outside of app session
 
@@ -65,10 +65,15 @@ exampleDF <- data.frame(
 getLabelProportions(exampleDF)
 ```
 
-If you have another CSV prepared, have a serialized a dataset to analyze, or have already exited the app after data export, you can simply convert the CSV to a dataframe (for example, via `as.data.frame()`) and proceed as above
+If you have another CSV prepared, or have a serialized a dataset to analyze you can simply convert the CSV to a dataframe (for example, via `as.data.frame()`) and proceed as above
 
 # References
-**TO DO** include references for code
+Attali, D. (2015 April 21). Supplementing your R package with a Shiny app. Retrieved from
+https://deanattali.com/2015/04/21/r-package-shiny-app/
+
+Laurent, S. (2019 September 11). Render images for interactive display from folder loaded with shinyDirChoose [StackOverflow page]. Retrieved from https://stackoverflow.com/questions/57891201/render-images-for-interactive-display-from-folder-loaded-with-shinydirchoose
+
+Steipe, B. (2019). rpt (R Package Template) [Github page]. Retrieved from https://github.com/hyginn/rpt
 ----
 
 ```{r}

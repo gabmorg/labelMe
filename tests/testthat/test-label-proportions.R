@@ -1,3 +1,7 @@
+context("Label app input type check")
+library(labelMe)
+#
+# test_that("")
 # > labPropTest <- getLabelProportions(exampleDF)
 # > labPropTest$pie_chart
 # > labPropTest$freq_chart

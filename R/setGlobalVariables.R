@@ -13,3 +13,4 @@
 #' \href{https://github.com/STAT545-UBC/Discussion/issues/451}{Link}
 #'
 if(getRversion() >= "3.5.0")  utils::globalVariables(c("LABELS", "label_1", "label_2"))
+# NOTE: label_1 and label_2 are included due to requirements of the "dplyr" library

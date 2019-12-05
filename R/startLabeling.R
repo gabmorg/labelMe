@@ -29,34 +29,30 @@ startLabeling <- function(labelingList) {
                         "ultrasound-shiny",
                         package = "labelMe")
   if (appDir == "") {
-    stop("Could not find the ultrasound-shiny app. Try re-installing `labelMe`.",
+    stop("ERROR: Could not find the ultrasound-shiny app. Try re-installing `labelMe`.",
          call. = FALSE)
   }
 
   else {
     # Checking that input is a list
     if(!is.list(labelingList)) {
-      stop("Input must be a list of 2 lists,
-           one for each group of radio button options")
+      stop("ERROR: Input must be a list of 2 lists, one for each group of radio button options")
     }
 
     # Checking input list is the right length
     else if(!length(labelingList) == 2) {
-      stop("Input must be a list of 2 lists,
-           one for each group of radio button options")
+      stop("ERROR: Input must be a list of 2 lists, one for each group of radio button options")
     }
 
     # Checking that all the labels are unique
     if(length(unique(unlist(labelingList[1]))) !=
        length(unlist(labelingList[1]))) {
-      stop("ERROR: Found repeating label in list 1,
-              please remove duplicates and try again")
+      stop("ERROR: Found repeating label in list 1, please remove duplicates and try again")
     }
 
     else if(length(unique(unlist(labelingList[2]))) !=
             length(unlist(labelingList[2]))) {
-      stop("ERROR: Found repeating label in list 2,
-              please remove duplicates and try again")
+      stop("ERROR: Found repeating label in list 2, please remove duplicates and try again")
     }
 
     # Pass the input variable (the desired labels for images) to labelMe

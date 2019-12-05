@@ -121,7 +121,7 @@ https://deanattali.com/2015/04/21/r-package-shiny-app/
 
 ## Acknowledgements
 
-This package was developed as part of an assessment for 2019 BCB410H: Applied Bioinformatics, University of Toronto, Toronto, CANADA.
+This package was developed as part of an assessment for 2019 BCB410: Applied Bioinformatics, University of Toronto, Toronto, CANADA.
 
 ----
 
