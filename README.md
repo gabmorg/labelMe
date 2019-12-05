@@ -59,10 +59,6 @@ Refer to package vignettes for more details. The package tree structure is provi
          |__ultrasound-shiny/
             |__app.R
             |__helpers.R
-            |__tests/
-               |__mytest-current/
-                  |__001.json
-                  |__001.png
             |__www/
       |__CITATION
       |__extdata/
@@ -72,21 +68,23 @@ Refer to package vignettes for more details. The package tree structure is provi
    |__labelMe.Rproj
    |__LICENSE
    |__man/
-      |__serveMe.Rd
+      |__getLabelProportions.Rd
+      |__startLabeling.Rd
       |__startLabelingGoldenberg.Rd
    |__NAMESPACE
    |__NEWS.md
    |__R/
-      |__rptTwee.R
-      |__serveMe.R
+      |__getLabelProportions.R
       |__setGlobalVariables.R
+      |__startLabeling.R
       |__startLabelingGoldenberg.R
    |__README.md
    |__tests/
       |__testthat.R
       |__testthat/
-         |__helper-test-serveMe.R
-         |__test-serveMe.R
+         |__test-startLabeling.R
+   |__vignettes/
+      |__Introduction_labelMe.Rmd
 ```
 
 An overview of the packageis illustrated below.
